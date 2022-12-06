@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const dotenv = require('dotenv').config();
 const port = process.env.PORT || 8000;
 const router = require('./routes/goalRoutes');
@@ -9,6 +10,9 @@ connectDB();
 
 const app = express();
 
+app.use(cors({
+    origin: "http://localhost:3000"
+}));
 app.use(errorHandler);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
