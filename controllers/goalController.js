@@ -20,6 +20,7 @@ const postGoal = asyncHandler(async (req, res) => {
         throw new Error("There is no text field");
     }
 
+
     const goal = await Goal.create({
         user: req.body.userId,
         text: req.body.text
