@@ -9,7 +9,11 @@ const mongoose = require('mongoose');
 // });
 
 const getGoals = asyncHandler(async (req, res) => {
-    const goals = await Goal.find({ user: req.user._id });
+    let goals = [];
+
+    if (req.user) {
+        goals = await Goal.find({ user: req.user._id });
+    }
 
     res.status(200).json(goals);
 });
@@ -50,8 +54,8 @@ const putGoal = asyncHandler(async (req, res) => {
     }
 
     const updatedGoal = await Goal.findByIdAndUpdate(req.params.id,
-        req.body, {new: true});
-    
+        req.body, { new: true });
+
     res.status(200).json(updatedGoal);
 });
 
